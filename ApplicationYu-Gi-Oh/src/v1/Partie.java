@@ -73,7 +73,7 @@ public class Partie {
 		int ChoixMenu;
 		int Resultat;
 		System.out.println("Sur quel profil voulez vous effectuer une action ? (Tapez le pseudo du joueur ou 'J1' ou 'J2' si celui-ci est trop long)");
-        choixJoueur = sc.next();
+        choixJoueur = sc.nextLine();
 
         if (choixJoueur.contains("J1") || choixJoueur.contains(listeJoueur.get(0).GetPseudo())){
         	System.out.println("Que voulez-vous faire ?\n ⓵-Voir vos Jetons\n ②-Ajouter/Supprimer un ou des jetons\n");
