@@ -4,6 +4,9 @@ import java.util.Scanner;
 @SuppressWarnings({"resource", "unused"})
 
 public class Partie {
+	
+	public static ArrayList<Joueur> listeJoueur = new ArrayList<Joueur>();
+
 
 	public static void GestionPV(Joueur J1, Joueur J2) {
 		String choixJoueur;
@@ -107,7 +110,6 @@ public class Partie {
 	}
 	public static void  main(String args[]){
 
-		ArrayList<Joueur> listeJoueur = new ArrayList<Joueur>();
         Scanner sc = new Scanner(System.in);
         Hasard Lancer = new Hasard();
         String Pseudo;
@@ -127,7 +129,7 @@ public class Partie {
         
         do {
         	for (int i=0; i<nbJoueurs; i++) {
-        		System.out.println(listeJoueur.get(i).GetPseudo());
+        		System.out.println(listeJoueur.get(i).GetPseudo()+" : "+listeJoueur.get(i).GetPV());
             }
             System.out.println("――――――――――――――――――――――――――――――");
             System.out.println("Que voulez-vous faire ? \n ①-placer des jetons ? \n ②-Effectuer des actions sur les PVs d'un joueur ? \n"
