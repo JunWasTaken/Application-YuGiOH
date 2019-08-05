@@ -1,5 +1,7 @@
-package v1;
+package v1Code;
 import java.util.Scanner;
+import exception.InvalidValue;
+import exception.InvalidNameException;
 @SuppressWarnings("resource")
 
 public class Joueur{
@@ -48,10 +50,9 @@ public class Joueur{
         return this.Numero;
     }
 
-    public boolean VerificationPseudo(Joueur J2){
+    public boolean VerificationPseudo(Joueur J2) throws InvalidNameException{
         if (this.Pseudo.equals(J2.Pseudo)){
-            System.out.println("Ce pseudo est déjà pris （・＿・；)");
-            return false;
+            throw new InvalidNameException();
         }else{
             return true;
         }
@@ -61,18 +62,14 @@ public class Joueur{
         return this.PV;
     }
 
-    public void ModifPV(int x, String y) {
+    public void ModifPV(int x) throws InvalidValue {
     	
-    	if (y.contains("-"))
+    	if (x<0)
         	PV=PV-x;
-        else if (y.contains("+"))
+        else if (x>0)
         	PV=PV+x;
-        else if (y.contains("/"))
-        	PV = PV/x;
-        else if (y.contains("*") || y.contains("x") || y.contains("X"))
-        	PV = PV*x;
         else 
-        	System.out.println("Veuillez saisir une opération valide");
+        	throw new InvalidValue();
     }
     
     public String ToString() {

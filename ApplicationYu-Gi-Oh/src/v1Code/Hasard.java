@@ -1,4 +1,4 @@
-package v1;
+package v1Code;
 public class Hasard{
     private int D6;
     private double coin;

@@ -1,4 +1,4 @@
-package v1;
+package v1Code;
 public class Random{
     public static void main(String args[]){
         Hasard Hazardous = new Hasard();

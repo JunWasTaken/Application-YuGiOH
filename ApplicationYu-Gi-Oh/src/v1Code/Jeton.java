@@ -1,4 +1,4 @@
-package v1;
+package v1Code;
 public class Jeton extends Monstre{
 	
 	public Jeton(){

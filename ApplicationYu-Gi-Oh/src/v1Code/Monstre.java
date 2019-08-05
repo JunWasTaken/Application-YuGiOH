@@ -1,4 +1,4 @@
-package v1;
+package v1Code;
 public class Monstre{
     protected String PositionCombat;
     protected int ATK;

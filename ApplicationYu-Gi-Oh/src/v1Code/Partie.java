@@ -1,14 +1,15 @@
-package v1;
+package v1Code;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import exception.InvalidValue;
 @SuppressWarnings({"resource", "unused"})
 
 public class Partie {
 	
 	public static ArrayList<Joueur> listeJoueur = new ArrayList<Joueur>();
 
-
-	public static void GestionPV(Joueur J1, Joueur J2) {
+	public static void GestionPV(Joueur J1, Joueur J2) throws InvalidValue{
 		String choixJoueur;
 		String choixAction;
 		int modifPV;
@@ -19,21 +20,15 @@ public class Partie {
 
         if (choixJoueur.contains("J1") || choixJoueur.contains(J1.GetPseudo())){
         System.out.println("D'accord que voulez vous faire ? (Tapez l'opération à effectuer)");
-            choixAction = sc.next(); modifPV = sc.nextInt();
-            if (modifPV>0) {
-            	J1.ModifPV(modifPV, choixAction);
-            }else {
-            	System.out.println("Veuillez saisir une valeur supérieure à 0");
-            }
-
+        	modifPV = sc.nextInt();
+            J1.ModifPV(modifPV);
         }else{
             System.out.println("D'accord que voulez vous faire ? (Tapez l'opération à effectuer)");
-            choixAction = sc.next();
             modifPV = sc.nextInt();
-            J2.ModifPV(modifPV, choixAction);
+            J2.ModifPV(modifPV);
         }
 	}
-	public static void GestionPV(Joueur J1, Joueur J2, Joueur J3, Joueur J4) {
+	public static void GestionPV(Joueur J1, Joueur J2, Joueur J3, Joueur J4) throws InvalidValue {
         int modifPV;
         String choixJoueur;
         String choixAction;
@@ -44,26 +39,22 @@ public class Partie {
 
         if (choixJoueur.contains("J1") || choixJoueur.contains(J1.GetPseudo())){
         	System.out.println("D'accord que voulez vous faire ? (Tapez l'opération à effectuer)");
-        	choixAction = sc.next();
         	modifPV = sc.nextInt();
-        	J1.ModifPV(modifPV, choixAction);
+        	J1.ModifPV(modifPV);
 
         }else if (choixJoueur.contains("J2") || choixJoueur.contains(J2.GetPseudo())) {
-         choixAction = sc.next();
         modifPV = sc.nextInt();
-        J2.ModifPV(modifPV, choixAction);
+        J2.ModifPV(modifPV);
 
         }else if (choixJoueur.contains("J3") || choixJoueur.contains(J3.GetPseudo())){
         	System.out.println("D'accord que voulez vous faire ? (Tapez l'opération à effectuer)");
-        	choixAction = sc.next();
         	modifPV = sc.nextInt();
-        	J3.ModifPV(modifPV, choixAction);
+        	J3.ModifPV(modifPV);
 
         }else{
         	System.out.println("D'accord que voulez vous faire ? (Tapez l'opération à effectuer)");
-        	choixAction = sc.next();
         	modifPV = sc.nextInt();
-        	J4.ModifPV(modifPV, choixAction);
+        	J4.ModifPV(modifPV);
         }
 	}
 	public static void GestionJeton(Joueur J1, Joueur J2) {
@@ -108,7 +99,7 @@ public class Partie {
 			
 		
 	}
-	public static void  main(String args[]){
+	public static void  main(String args[]) throws Exception{
 
         Scanner sc = new Scanner(System.in);
         Hasard Lancer = new Hasard();
