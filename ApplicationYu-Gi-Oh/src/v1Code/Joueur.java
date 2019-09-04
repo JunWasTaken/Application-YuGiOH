@@ -73,7 +73,7 @@ public class Joueur{
     }
     
     public String ToString() {
-    	return ("――――――――――――――――――――――――――――――\n"+"Pseudo : "+this.GetPseudo() + "\t PV : "+this.GetPV());
+    	return ("Pseudo : "+this.GetPseudo() + "\t PV : "+this.GetPV());
     }
 
 	
