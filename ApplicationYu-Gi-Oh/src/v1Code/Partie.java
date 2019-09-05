@@ -8,12 +8,11 @@ import exception.InvalidValue;
 public class Partie {
 	
 	public static ArrayList<Joueur> listeJoueur = new ArrayList<Joueur>();
-
+	public static Scanner sc = new Scanner(System.in);
 	public static void GestionPV(Joueur J1, Joueur J2) throws InvalidValue{
 		String choixJoueur;
 		String choixAction;
 		int modifPV;
-		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Sur quel profil voulez vous effectuer une action ? (Tapez le pseudo du joueur ou 'J1' ou 'J2' si celui-ci est trop long)");
         choixJoueur = sc.next();
@@ -57,27 +56,6 @@ public class Partie {
         	J4.ModifPV(modifPV);
         }
 	}
-	public static void GestionJeton(Joueur J1, Joueur J2) {
-		Jeton a = new Jeton();
-		Scanner sc = new Scanner(System.in);
-		String choixJoueur;
-		int ChoixMenu;
-		int Resultat;
-		System.out.println("Sur quel profil voulez vous effectuer une action ? (Tapez le pseudo du joueur ou 'J1' ou 'J2' si celui-ci est trop long)");
-        choixJoueur = sc.nextLine();
-
-        if (choixJoueur.contains("J1") || choixJoueur.contains(listeJoueur.get(0).GetPseudo())){
-        	System.out.println("Que voulez-vous faire ?\n 1-Voir vos Jetons\n 2-Ajouter/Supprimer un ou des jetons\n");
-    		ChoixMenu = sc.nextInt();
-    		if (ChoixMenu == 1) {
-    			for (int i=0; i<J1.NombreJetons; i++) {
-    			}
-    		}else {
-    			System.out.println();
-    			J1.GererJetons();
-    		}
-        }
-	}
 	public static void GestionHasard() {
 		Hasard DontKnowWhatImDoing = new Hasard();
 		Scanner sc = new Scanner(System.in);
@@ -99,9 +77,14 @@ public class Partie {
 			
 		
 	}
-	public static void  main(String args[]) throws Exception{
-
-        Scanner sc = new Scanner(System.in);
+	public static void RegisterPlayer(int i) {
+		System.out.println("Veuillez rentrer un pseudo pour le joueur : ");
+        String var = sc.next();
+        for (int j=0; j<i; j++) {
+        	
+        }
+	}
+	public static void DeroulementPartie() throws Exception {
         Hasard Lancer = new Hasard();
         String Pseudo;
         String choixJoueur;
@@ -114,8 +97,9 @@ public class Partie {
         System.out.println("Combien de Joueurs vont participer a  la partie ? (2 ou 4)");
         int nbJoueurs = sc.nextInt();
         
-    	for (int i=0; i<nbJoueurs; i++)
+    	for (int i=0; i<nbJoueurs; i++) {
     		listeJoueur.add(Joueur.createJoueur());
+    	}
 
         
         do {
@@ -123,23 +107,22 @@ public class Partie {
         		System.out.println(listeJoueur.get(i).GetPseudo()+" : "+listeJoueur.get(i).GetPV());
             }
             System.out.println("------------------------------------------------------------------------");
-            System.out.println("Que voulez-vous faire ? \n 1-placer des jetons ? \n 2-Effectuer des actions sur les PVs d'un joueur ? \n 3-Partie Hasard ");
+            System.out.println("Que voulez-vous faire ? \n 1-Effectuer des actions sur les PVs d'un joueur ? \n 2-Partie Hasard ");
             ChoixMenu = sc.nextInt();
             
             if (ChoixMenu == 1){
-            	if (nbJoueurs == 2)
-            		GestionJeton(listeJoueur.get(0), listeJoueur.get(1));
-            }else if (ChoixMenu == 2){
-                if (nbJoueurs==2){ 
+            	if (nbJoueurs==2){ 
                 	GestionPV(listeJoueur.get(0), listeJoueur.get(1));
                 }
-
                 if (nbJoueurs==4){ 
                     GestionPV(listeJoueur.get(0), listeJoueur.get(1), listeJoueur.get(2), listeJoueur.get(3));
                 }
-            }else if (ChoixMenu == 3) {
+            }else if (ChoixMenu == 2){
             	GestionHasard();
             }
         }while ((listeJoueur.get(0).PV!=0) || (listeJoueur.get(0).PV !=0) || (listeJoueur.get(0).PV!=0) || (listeJoueur.get(0).PV!=0)); 
-    }
+	}
+	public static void  main(String args[]) throws Exception{
+		DeroulementPartie();
+	}
 }
