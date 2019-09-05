@@ -63,13 +63,7 @@ public class Joueur{
     }
 
     public void ModifPV(int x) throws InvalidValue {
-    	
-    	if (x<0)
-        	PV=PV-x;
-        else if (x>0)
-        	PV=PV+x;
-        else 
-        	throw new InvalidValue();
+    	this.PV = this.PV+x;
     }
     
     public String ToString() {
