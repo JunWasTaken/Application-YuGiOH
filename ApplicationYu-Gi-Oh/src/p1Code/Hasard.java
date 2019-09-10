@@ -1,4 +1,4 @@
-package v1Code;
+package p1Code;
 public class Hasard{
     private int D6;
     private double coin;
@@ -13,13 +13,16 @@ public class Hasard{
         return this.D6;
     }
 
-    public int CoinFlip(){
+    public String CoinFlip(){
         coin=Math.random();
         if (coin < 0.5){
             coin=1;
         }else{
             coin=2;
         }
-        return (int)this.coin;
+        if (coin==1) 
+        	return "Pile";
+        else
+        	return "Face";
     }
 }

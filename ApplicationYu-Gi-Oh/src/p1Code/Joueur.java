@@ -1,7 +1,7 @@
-package v1Code;
+package p1Code;
 import java.util.ArrayList;
 import java.util.Scanner;
-import exception.InvalidValue;
+import exception.InvalidValuePV;
 import exception.InvalidNameException;
 @SuppressWarnings("resource")
 
@@ -21,7 +21,7 @@ public class Joueur{
         Numero+=1;
     }
     
-    public static Joueur createJoueur() throws InvalidNameException{
+    public Joueur createJoueur() throws InvalidNameException{
     	Joueur a = new Joueur();
     	Scanner sc = new Scanner(System.in);
     	Boolean flag = false;
@@ -31,7 +31,6 @@ public class Joueur{
         	for (int i=0; i<ListePseudo.size() ; i++) {
             	if (var == ListePseudo.get(i)) {
             		flag = true;
-            		throw new InvalidNameException();
             	}
             }
         	if (flag == false) {
@@ -66,21 +65,15 @@ public class Joueur{
         return this.PV;
     }
 
-    public void ModifPV(int x) throws InvalidValue {
+    public void ModifPV(int x) throws InvalidValuePV {
     	this.PV = this.PV+x;
     }
     
     public String ToString() {
     	return ("Pseudo : "+this.GetPseudo() + "\t PV : "+this.GetPV());
     }
-
 	
     public int getNombreJetons() {
 		return NombreJetons;
 	}
-    
-	public void GererJetons() {
-    	//TODO : créer fonctions gestion jetons 
-		
-    }  
 }

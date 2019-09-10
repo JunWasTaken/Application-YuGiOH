@@ -36,3 +36,5 @@ insert into ID_Log values(
     123
     );
     
+select * from Duellist;
+    
