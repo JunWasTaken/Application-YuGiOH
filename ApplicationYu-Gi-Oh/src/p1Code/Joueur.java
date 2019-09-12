@@ -22,23 +22,11 @@ public class Joueur{
     }
     
     public Joueur createJoueur() throws InvalidNameException{
-    	Joueur a = new Joueur();
     	Scanner sc = new Scanner(System.in);
-    	Boolean flag = false;
     	System.out.println("Veuillez rentrer un pseudo pour le joueur : ");
         String var = sc.next();
-        do {
-        	for (int i=0; i<ListePseudo.size() ; i++) {
-            	if (var == ListePseudo.get(i)) {
-            		flag = true;
-            	}
-            }
-        	if (flag == false) {
-                a.SetPseudo(var);
-                ListePseudo.add(var);
-        	}
-        } while (a.GetPseudo() == null);
-        return a;
+        this.SetPseudo(var);
+        return this;
     }
 
 	public void  SetPseudo(String x){

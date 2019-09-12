@@ -10,28 +10,29 @@ import exception.InvalidChoiceException;
 
 public class Match2J {
 	public Scanner sc = new Scanner(System.in);
-	public ArrayList<Joueur> ListeJoueur = new ArrayList<Joueur>();
+	private ArrayList<Joueur> ListeJoueur = new ArrayList<Joueur>();
 	public int NbJoueur;
 	
 	public Match2J() throws Exception {
 		this.DeroulementPartie();
 	}
 	
-	public void initialisationNbJoueur() {
+	public void initialisationNbJoueur() { //initialise le nombre de Joueurs
 		System.out.println("Combien de Joueur vont Participer ? 2 ou 4 ?");
 		NbJoueur = sc.nextInt();
 	}
 	
-	public void initialisationJoueur() throws InvalidNameException {
-		Joueur a = new Joueur();
-		
+	public void initialisationJoueur() throws InvalidNameException { //Initialise un joueur et l'ajoute à la liste des joueurs
+		boolean flag;
+		String nickname;
 		for (int i=0; i<NbJoueur; i++) {
+			Joueur a = new Joueur();
 			a.createJoueur();
 			ListeJoueur.add(a);
 		}
 	}
 
-	public void GestionHasard() throws InvalidValueHasard {
+	public void GestionHasard() throws InvalidValueHasard { //Gère le choix du joueur au cas où une gestion du hasard serait nécessaire
 		Hasard h = new Hasard();
 		int choix;
 		
@@ -48,7 +49,7 @@ public class Match2J {
 		}
 	}
 
-	public void GestionPV2J() throws InvalidValuePV {
+	public void GestionPV2J() throws InvalidValuePV { //Gère les PVs dans un match à 2 Joueurs
 		String choixJoueur;
 		int pv;
 		System.out.println("Veuillez saisir le pseudo du Joueur concerne (Vous pouvez egalement entrer son numero de joueur)");
@@ -67,14 +68,14 @@ public class Match2J {
 			throw new InvalidValuePV();
 	}
 
-	public void MessageFinPartie2J() {
+	public void MessageFinPartie2J() { //Affiche un message personnalisé en fonction du joueur qui a gagné 
 		if (ListeJoueur.get(0).GetPV()==0)
 			System.out.println(ListeJoueur.get(0).GetPseudo()+" a perdu");
 		else
 			System.out.println(ListeJoueur.get(1).GetPseudo()+" a perdu");
 	}
 
-	public void DeroulementPartie() throws Exception {
+	public void DeroulementPartie() throws Exception { //Gère le déroulement d'une partie à 2 Joueurs
 		int choix;
 		this.initialisationNbJoueur();
 		this.initialisationJoueur();

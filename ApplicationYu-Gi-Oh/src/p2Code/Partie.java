@@ -10,7 +10,7 @@ public class Partie {
 		int choix;
 		Match2J play;
 		do {
-			System.out.print("Que voulez-vous faire ?\n1-Faire une partie à 2 joueurs\n2-Vous connecter");
+			System.out.print("Que voulez-vous faire ?\n1-Faire une partie à 2 joueurs\n2-Vous connecter\n");
 			choix=sc.nextInt();
 		}while(choix!=1);
 		play= new Match2J();
