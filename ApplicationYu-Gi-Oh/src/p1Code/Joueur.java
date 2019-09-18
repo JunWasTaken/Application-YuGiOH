@@ -1,17 +1,16 @@
 package p1Code;
-import java.util.ArrayList;
 import java.util.Scanner;
 import exception.InvalidValuePV;
 import exception.InvalidNameException;
 @SuppressWarnings("resource")
 
 public class Joueur{
-    protected  static int Numero = 1;
-    protected static ArrayList<String> ListePseudo = new ArrayList<String>();
+    protected static int Numero = 1;
     protected static int Num;
     protected String Pseudo;
     protected int PV;
     protected int NombreJetons;
+    protected terrain Terrain;
 
     public Joueur(){
         PV=8000;

@@ -54,7 +54,7 @@ public class Match2J {
 		int pv;
 		System.out.println("Veuillez saisir le pseudo du Joueur concerne (Vous pouvez egalement entrer son numero de joueur)");
 		choixJoueur = sc.next();
-		if (choixJoueur.contains(ListeJoueur.get(0).GetPseudo()) || choixJoueur.contains("Joueur 1") || choixJoueur.contains("1") || choixJoueur.contains("J1")) {
+		if (choixJoueur.contains(ListeJoueur.get(0).GetPseudo()) /*|| choixJoueur.contains((char)ListeJoueur.get(0).GetNumero())*/ || choixJoueur.contains("Joueur 1") || choixJoueur.contains("1") || choixJoueur.contains("J1")) {
 			System.out.print("De combien voulez-vous modifier les PV du Joueur ? ");
 			pv = sc.nextInt();
 			System.out.print("\n");
