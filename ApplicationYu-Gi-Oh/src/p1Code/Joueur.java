@@ -5,8 +5,6 @@ import exception.InvalidNameException;
 @SuppressWarnings("resource")
 
 public class Joueur{
-    protected static int Numero = 1;
-    protected static int Num;
     protected String Pseudo;
     protected int PV;
     protected int NombreJetons;
@@ -15,9 +13,7 @@ public class Joueur{
     public Joueur(){
         PV=8000;
         Pseudo=null;
-        NombreJetons=0;
-        Num = (int) Numero;
-        Numero+=1;
+        Terrain = new terrain();
     }
     
     public Joueur createJoueur() throws InvalidNameException{
@@ -34,10 +30,6 @@ public class Joueur{
 
     public String GetPseudo(){
         return this.Pseudo;
-    }
-
-    public int GetNumero(){
-        return this.Numero;
     }
 
     public boolean VerificationPseudo(Joueur J2) throws InvalidNameException{
@@ -63,4 +55,10 @@ public class Joueur{
     public int getNombreJetons() {
 		return NombreJetons;
 	}
+
+	public terrain getTerrain() {
+		return Terrain;
+	}
+  
+    
 }

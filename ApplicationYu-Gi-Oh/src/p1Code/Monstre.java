@@ -1,4 +1,7 @@
 package p1Code;
+
+import java.util.Scanner;
+
 public class Monstre{
     protected String PositionCombat;
     protected int ATK;
@@ -32,7 +35,40 @@ public class Monstre{
         Attribut = attribut;
         Effet = effet;
     }
-
+    
+    public Monstre CreationMonstre() throws Exception{
+    	Scanner sc = new Scanner(System.in);
+    	int choixPos, lvl, atk, def;
+    	String Token;
+    	Monstre x = new Monstre();
+    	
+    	System.out.print("En quelle position voulez-vous invoquer ce monstre :\n1-Attaque\n2-Defense\nChoix : ");
+    	choixPos=sc.nextInt();
+		System.out.print("\n");
+		
+    	while(choixPos!=1 && choixPos!=2){
+    		System.out.print("Merci de faire un choix valide : ");
+    		choixPos=sc.nextInt();
+    		System.out.print("\n");
+    	}
+    	
+    	if (choixPos==1)
+    		this.setPositionCombat("Attaque");
+    	else 
+    		this.setPositionCombat("Defense");
+    	
+    	System.out.print("Veuillez saisir un nom pour le token : ");
+    	this.setNom(Token = sc.next());
+    	System.out.println(this.getNom());
+    	
+    	System.out.print("Saisir un Attribut pour le token : ");
+    	this.setAttribut(Token = sc.next());
+    	
+    	System.out.print("Saisir des stats d'attaque puis de défense pour le token : ");
+    	this.setStats(atk=sc.nextInt(), def=sc.nextInt());
+    	return x;
+    }
+    
 	public String getPositionCombat() {
 		return PositionCombat;
 	}
@@ -45,16 +81,13 @@ public class Monstre{
 		return ATK;
 	}
 
-	public void setATK(int aTK) {
+	public void setStats(int aTK, int def) {
 		ATK = aTK;
+		DEF = def;
 	}
 
 	public int getDEF() {
 		return DEF;
-	}
-
-	public void setDEF(int dEF) {
-		DEF = dEF;
 	}
 
 	public int getNiveau() {

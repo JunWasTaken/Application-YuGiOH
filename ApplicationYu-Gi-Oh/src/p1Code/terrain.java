@@ -1,22 +1,20 @@
 package p1Code;
 
-import exception.CaseNonDisponibleException;
 import exception.CaseVideException;
+@SuppressWarnings("unused")
 
 public class terrain {
 	private Jeton Terrain[];
 	
 	public terrain() {
-		Terrain[0]=null;
+		Jeton Terrain[]= new Jeton[5];
 	}
 	
-	public boolean addToken(Jeton t, int i) throws CaseNonDisponibleException {
-		if (Terrain[i]!=null) {
-			Terrain[i]=t;
-			return true;
-		}
-		else
-			throw new CaseNonDisponibleException();
+	public boolean addToken(int i) throws Exception {
+		Jeton t = new Jeton();
+		t.CreationMonstre();
+		this.Terrain[i]=t;
+		return true;
 	}
 	
 	public boolean removeToken(int i) throws CaseVideException{

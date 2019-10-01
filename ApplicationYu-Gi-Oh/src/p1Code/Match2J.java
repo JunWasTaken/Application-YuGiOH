@@ -6,7 +6,10 @@ import java.util.Scanner;
 import exception.InvalidNameException;
 import exception.InvalidValueHasard;
 import exception.InvalidValuePV;
+import exception.CaseNonDisponibleException;
+import exception.CaseVideException;
 import exception.InvalidChoiceException;
+@SuppressWarnings("unused")
 
 public class Match2J {
 	public Scanner sc = new Scanner(System.in);
@@ -31,7 +34,48 @@ public class Match2J {
 			ListeJoueur.add(a);
 		}
 	}
-
+	
+	public void GestionTerrain() throws Exception{ //Gère les options liées au terrain des deux joueurs  
+		InvalidChoiceException e = new InvalidChoiceException();
+		String choixJoueur;
+		int caseTerrain, choix, mode;
+		
+		System.out.println("Veuillez saisir le pseudo du Joueur concerne (Vous pouvez egalement entrer son numero de joueur)");
+		choixJoueur = sc.next();
+		if (choixJoueur.contains(ListeJoueur.get(0).GetPseudo()) || choixJoueur.contains("Joueur 1") || choixJoueur.contains("1") || choixJoueur.contains("J1")) {
+			do {
+				System.out.print("Que voulez-vous faire ? \n1-Supprimer un token\n2-Ajouter un token\nChoix : ");
+				choix= sc.nextInt();
+				System.out.println();
+			}while (choix !=1 && choix !=2);
+			System.out.print("Selectionner la case en entrant son numero : ");
+			caseTerrain = sc.nextInt();
+			if (choix==1) {
+				ListeJoueur.get(0).getTerrain().removeToken(caseTerrain);
+			}else {
+				try {
+					ListeJoueur.get(0).getTerrain().addToken(caseTerrain);
+				}catch (CaseNonDisponibleException e1) {
+					System.out.println("La case n'est pas disponible");
+				};
+			}
+		}else if (choixJoueur.contains(ListeJoueur.get(1).GetPseudo()) || choixJoueur.contains("Joueur 2") || choixJoueur.contains("2") || choixJoueur.contains("J2")) {
+			do {
+				System.out.print("Que voulez-vous faire ? \n1-Supprimer un token\n2-Ajouter un token\nChoix : ");
+				choix= sc.nextInt();
+				System.out.println();
+			}while (choix !=1 || choix !=2);
+			System.out.print("Selectionner la case en entrant son numero : ");
+			caseTerrain = sc.nextInt();
+			if (choix==1) {
+				ListeJoueur.get(0).getTerrain().removeToken(caseTerrain);
+			}else {
+				ListeJoueur.get(0).getTerrain().addToken(caseTerrain);
+			}
+		}else
+			throw e;
+	}
+	
 	public void GestionHasard() throws InvalidValueHasard { //Gère le choix du joueur au cas où une gestion du hasard serait nécessaire
 		Hasard h = new Hasard();
 		int choix;
@@ -54,7 +98,7 @@ public class Match2J {
 		int pv;
 		System.out.println("Veuillez saisir le pseudo du Joueur concerne (Vous pouvez egalement entrer son numero de joueur)");
 		choixJoueur = sc.next();
-		if (choixJoueur.contains(ListeJoueur.get(0).GetPseudo()) /*|| choixJoueur.contains((char)ListeJoueur.get(0).GetNumero())*/ || choixJoueur.contains("Joueur 1") || choixJoueur.contains("1") || choixJoueur.contains("J1")) {
+		if (choixJoueur.contains(ListeJoueur.get(0).GetPseudo()) || choixJoueur.contains("Joueur 1") || choixJoueur.contains("1") || choixJoueur.contains("J1")) {
 			System.out.print("De combien voulez-vous modifier les PV du Joueur ? ");
 			pv = sc.nextInt();
 			System.out.print("\n");
@@ -85,11 +129,14 @@ public class Match2J {
 			int PVJ1 = ListeJoueur.get(0).GetPV();
 			int PVJ2 = ListeJoueur.get(1).GetPV();
 			System.out.print("-----------------------\nPV "+NicknameJ1+" : "+PVJ1+"\nPV "+NicknameJ2+" : "+PVJ2+"\n-----------------------\n");
-			System.out.println("Que voulez-vous faire ?\n1-Gerer les PV\n2-Partie Hasard");
+			System.out.print("Que voulez-vous faire ?\n1-Gerer les PV\n2-Gerer les tokens\n3-Partie Hasard\nChoix : ");
 			choix = sc.nextInt();
+			System.out.print("\n");
 			if (choix==1)
 				this.GestionPV2J();
 			else if (choix==2)
+				this.GestionTerrain();
+			else if (choix==3)
 				this.GestionHasard();
 			else 
 				throw new InvalidChoiceException();
