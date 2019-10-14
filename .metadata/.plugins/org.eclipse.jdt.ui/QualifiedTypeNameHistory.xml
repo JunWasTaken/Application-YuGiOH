@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="exception.InvalidValue"/>
+<fullyQualifiedTypeName name="exception.InvalidValuePV"/>
+<fullyQualifiedTypeName name="exception.InvalidChoiceException"/>
+<fullyQualifiedTypeName name="p1Code.Match2J"/>
+<fullyQualifiedTypeName name="exception.CaseVideException"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="exception.CaseNonDisponibleException"/>
+</qualifiedTypeNameHistroy>

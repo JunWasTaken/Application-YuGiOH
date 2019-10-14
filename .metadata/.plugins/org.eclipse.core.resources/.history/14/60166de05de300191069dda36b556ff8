@@ -1,0 +1,37 @@
+package p1Code;
+
+import exception.CaseNonDisponibleException;
+import exception.CaseVideException;
+
+public class terrain {
+	private Jeton Terrain[];
+	
+	public terrain() {
+		for (int i=1; i<=5; i++)
+			Terrain[i]=null;
+	}
+	
+	public boolean addToken(int i) throws Exception {
+		Jeton t = new Jeton();
+		t.CreationMonstre();
+		if (Terrain[i]!=null) {
+			Terrain[i]=(Jeton) t;
+			return true;
+		}
+		else
+			throw new CaseNonDisponibleException();
+	}
+	
+	public boolean removeToken(int i) throws CaseVideException{
+		if (Terrain[i]==null)
+			throw new CaseVideException();
+		else {
+			Terrain[i]=null;
+			return true;
+		}
+	}
+
+	public Jeton[] getTerrain() {
+		return Terrain;
+	}
+}
