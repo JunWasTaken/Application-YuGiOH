@@ -11,7 +11,7 @@ public class Joueur{
     protected terrain Terrain;
 
     public Joueur(){
-        PV=8000;
+        PV=8000; 
         Pseudo=null;
         Terrain = new terrain();
     }

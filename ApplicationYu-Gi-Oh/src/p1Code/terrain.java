@@ -1,13 +1,16 @@
 package p1Code;
 
 import exception.CaseVideException;
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 
 public class terrain {
 	private Jeton Terrain[];
 	
 	public terrain() {
 		Jeton Terrain[]= new Jeton[5];
+		for (int i=0; i<5; i++) {
+			Terrain[i]=new Jeton();
+		}
 	}
 	
 	public boolean addToken(int i) throws Exception {
