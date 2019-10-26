@@ -13,7 +13,7 @@ public class terrain {
 		}
 	}
 	
-	public boolean addToken(int i) throws Exception {
+	public boolean addToken(int i){
 		Jeton t = new Jeton();
 		t.CreationMonstre();
 		this.Terrain[i]=t;

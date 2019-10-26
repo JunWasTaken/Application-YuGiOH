@@ -44,7 +44,7 @@ public class Joueur{
         return this.PV;
     }
 
-    public void ModifPV(int x) throws InvalidValuePV {
+    public void ModifPV(int x){
     	this.PV = this.PV+x;
     }
     

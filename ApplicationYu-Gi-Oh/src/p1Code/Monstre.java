@@ -36,7 +36,7 @@ public class Monstre{
         Effet = effet;
     }
     
-    public Monstre CreationMonstre() throws Exception{
+    public Monstre CreationMonstre(){
     	Scanner sc = new Scanner(System.in);
     	int choixPos, lvl, atk, def;
     	String Token;

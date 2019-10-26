@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import exception.InvalidNameException;
+import exception.InvalidPlayerChoice;
 import exception.InvalidValueHasard;
 import exception.InvalidValuePV;
 import exception.CaseNonDisponibleException;
@@ -14,15 +15,16 @@ import exception.InvalidChoiceException;
 public class Match2J {
 	public Scanner sc = new Scanner(System.in);
 	private ArrayList<Joueur> ListeJoueur = new ArrayList<Joueur>();
-	public int NbJoueur;
+	public int NbJoueur = 2;
 	
 	public Match2J() throws Exception {
-		this.DeroulementPartie();
-	}
-	
-	public void initialisationNbJoueur() { //initialise le nombre de Joueurs
-		System.out.println("Combien de Joueur vont Participer ? 2 ou 4 ?");
-		NbJoueur = sc.nextInt();
+		try {
+			this.DeroulementPartie();
+		}catch (InvalidChoiceException e){
+			System.out.println("Choix Invalide");
+		}finally {
+			this.DeroulementPartie();
+		}
 	}
 	
 	public void initialisationJoueur() throws InvalidNameException { //Initialise un joueur et l'ajoute à la liste des joueurs
@@ -53,11 +55,7 @@ public class Match2J {
 			if (choix==1) {
 				ListeJoueur.get(0).getTerrain().removeToken(caseTerrain);
 			}else {
-				try {
-					ListeJoueur.get(0).getTerrain().addToken(caseTerrain);
-				}catch (CaseNonDisponibleException e1) {
-					System.out.println("La case n'est pas disponible");
-				};
+				ListeJoueur.get(0).getTerrain().addToken(caseTerrain);
 			}
 		}else if (choixJoueur.contains(ListeJoueur.get(1).GetPseudo()) || choixJoueur.contains("Joueur 2") || choixJoueur.contains("2") || choixJoueur.contains("J2")) {
 			do {
@@ -93,7 +91,7 @@ public class Match2J {
 		}
 	}
 
-	public void GestionPV2J() throws InvalidValuePV { //Gère les PVs dans un match à 2 Joueurs
+	public void GestionPV2J() throws InvalidPlayerChoice { //Gère les PVs dans un match à 2 Joueurs
 		String choixJoueur;
 		int pv;
 		System.out.println("Veuillez saisir le pseudo du Joueur concerne (Vous pouvez egalement entrer son numero de joueur)");
@@ -109,7 +107,7 @@ public class Match2J {
 			System.out.print("\n");
 			ListeJoueur.get(1).ModifPV(pv);
 		}else
-			throw new InvalidValuePV();
+			throw new InvalidPlayerChoice();
 	}
 
 	public void MessageFinPartie2J() { //Affiche un message personnalisé en fonction du joueur qui a gagné 
@@ -121,7 +119,6 @@ public class Match2J {
 
 	public void DeroulementPartie() throws Exception { //Gère le déroulement d'une partie à 2 Joueurs
 		int choix;
-		this.initialisationNbJoueur();
 		this.initialisationJoueur();
 		do {
 			String NicknameJ1 = ListeJoueur.get(0).GetPseudo();
@@ -132,13 +129,31 @@ public class Match2J {
 			System.out.print("Que voulez-vous faire ?\n1-Gerer les PV\n2-Gerer les tokens\n3-Partie Hasard\nChoix : ");
 			choix = sc.nextInt();
 			System.out.print("\n");
-			if (choix==1)
-				this.GestionPV2J();
-			else if (choix==2)
-				this.GestionTerrain();
-			else if (choix==3)
-				this.GestionHasard();
-			else 
+			if (choix==1) {
+				try {
+					this.GestionPV2J();					
+				}catch (InvalidPlayerChoice e) {
+					System.out.println("\nMauvais choix de Joueur");
+				}finally {
+					this.GestionPV2J();
+				}
+			}else if (choix==2) {
+				try {
+					this.GestionTerrain();
+				}catch (InvalidChoiceException e) {
+					System.out.println("\nChoix Invalide");
+				}finally {
+					this.GestionTerrain();
+				}
+			}else if (choix==3) {
+				try {
+					this.GestionHasard();
+				}catch (InvalidValueHasard e) {
+					System.out.println("\nMauvais Choix !");
+				}finally {
+					this.GestionHasard();
+				}
+			}else 
 				throw new InvalidChoiceException();
 		}while(ListeJoueur.get(0).GetPV()!=0 && ListeJoueur.get(0).GetPV()!=0);
 		this.MessageFinPartie2J();
