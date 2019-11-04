@@ -1,0 +1,160 @@
+package p1Code;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import exception.InvalidNameException;
+import exception.InvalidPlayerChoiceException;
+import exception.InvalidValueHasard;
+import exception.InvalidValuePV;
+import exception.CaseNonDisponibleException;
+import exception.CaseVideException;
+import exception.InvalidChoiceException;
+@SuppressWarnings("unused")
+
+public class Match2J {
+	public Scanner sc = new Scanner(System.in);
+	private ArrayList<Joueur> ListeJoueur = new ArrayList<Joueur>();
+	public int NbJoueur = 2;
+	
+	public Match2J() throws Exception {
+		this.DeroulementPartie();
+	}
+	
+	public void initialisationJoueur() throws InvalidNameException { //Initialise un joueur et l'ajoute à la liste des joueurs
+		boolean flag;
+		String nickname;
+		for (int i=0; i<NbJoueur; i++) {
+			Joueur a = new Joueur();
+			a.createJoueur();
+			ListeJoueur.add(a);
+		}
+	}
+	
+	public void GestionTerrain() throws Exception{ //Gère les options liées au terrain des deux joueurs  
+		InvalidChoiceException e = new InvalidChoiceException();
+		String choixJoueur;
+		int caseTerrain, choix, mode;
+		
+		System.out.println("Veuillez saisir le pseudo du Joueur concerne (Vous pouvez egalement entrer son numero de joueur)");
+		choixJoueur = sc.next();
+		if (choixJoueur.contains(ListeJoueur.get(0).GetPseudo()) || choixJoueur.contains("Joueur 1") || choixJoueur.contains("1") || choixJoueur.contains("J1")) {
+			do {
+				ListeJoueur.get(0).getTerrain().afficheTerrain();
+				System.out.print("Que voulez-vous faire ? \n1-Supprimer un token\n2-Ajouter un token\nChoix : ");
+				choix= sc.nextInt();
+				System.out.println();
+			}while (choix !=1 && choix !=2);
+			System.out.print("Selectionner la case en entrant son numero : ");
+			caseTerrain = sc.nextInt();
+			if (choix==1) {
+				try {
+					ListeJoueur.get(0).getTerrain().removeToken(caseTerrain);
+				}catch (CaseVideException e) {
+					System.out.println("La case n'était pas vide >:(");
+				}finally {
+					System.out.print("Selectionner la case en entrant son numero : ");
+					caseTerrain = sc.nextInt();
+					this.ListeJoueur.get(0).getTerrain().removeToken(caseTerrain);
+				}
+			}else {
+				ListeJoueur.get(0).getTerrain().addToken(caseTerrain);
+			}
+		}else if (choixJoueur.contains(ListeJoueur.get(1).GetPseudo()) || choixJoueur.contains("Joueur 2") || choixJoueur.contains("2") || choixJoueur.contains("J2")) {
+			do {
+				ListeJoueur.get(1).getTerrain().afficheTerrain();
+				System.out.print("Que voulez-vous faire ? \n1-Supprimer un token\n2-Ajouter un token\nChoix : ");
+				choix= sc.nextInt();
+				System.out.println();
+			}while (choix !=1 || choix !=2);
+			System.out.print("Selectionner la case en entrant son numero : ");
+			caseTerrain = sc.nextInt();
+			if (choix==1) {
+				ListeJoueur.get(0).getTerrain().removeToken(caseTerrain);
+			}else {
+				ListeJoueur.get(0).getTerrain().addToken(caseTerrain);
+			}
+		}else
+			throw e;
+	}
+	
+	public void GestionHasard() throws InvalidValueHasard { //Gère le choix du joueur au cas où une gestion du hasard serait nécessaire
+		Hasard h = new Hasard();
+		int choix;
+		
+		System.out.println("Que voulez-vous faire ?\n 1-Lancer de pièce\n 2-lancer de dé");
+		choix=sc.nextInt();
+		if (choix!=1 && choix !=2)
+			throw new InvalidValueHasard();
+		else {
+			if (choix==1) {
+				System.out.println("La piece a ete lancee, vous avez fait "+h.CoinFlip());
+			}else{
+				System.out.println("Le de a roule et c'est arrete sur un "+h.LancerDe());
+			}
+		}
+	}
+
+	public void GestionPV2J() throws InvalidPlayerChoiceException{ //Gère les PVs dans un match à 2 Joueurs
+		String choixJoueur;
+		int pv;
+		System.out.println("Veuillez saisir le pseudo du Joueur concerne (Vous pouvez egalement entrer son numero de joueur)");
+		choixJoueur = sc.next();
+		if (choixJoueur.contains(ListeJoueur.get(0).GetPseudo()) || choixJoueur.contains("Joueur 1") || choixJoueur.contains("1") || choixJoueur.contains("J1")) {
+			System.out.print("De combien voulez-vous modifier les PV du Joueur ? ");
+			pv = sc.nextInt();
+			System.out.print("\n");
+			ListeJoueur.get(0).ModifPV(pv);
+		}else if (choixJoueur.contains(ListeJoueur.get(1).GetPseudo()) || choixJoueur.contains("Joueur 2") || choixJoueur.contains("2") || choixJoueur.contains("J2")) {
+			System.out.print("De combien voulez-vous modifier les PV du Joueur ? ");
+			pv = sc.nextInt();
+			System.out.print("\n");
+			ListeJoueur.get(1).ModifPV(pv);
+		}else {
+			throw new InvalidPlayerChoiceException();
+		}
+	}
+
+	public void MessageFinPartie2J() { //Affiche un message personnalisé en fonction du joueur qui a gagné 
+		if (ListeJoueur.get(0).GetPV()==0)
+			System.out.println(ListeJoueur.get(0).GetPseudo()+" a perdu");
+		else
+			System.out.println(ListeJoueur.get(1).GetPseudo()+" a perdu");
+	}
+
+	public void DeroulementPartie() throws Exception { //Gère le déroulement d'une partie à 2 Joueurs
+		int choix;
+		this.initialisationJoueur();
+		do {
+			String NicknameJ1 = ListeJoueur.get(0).GetPseudo();
+			String NicknameJ2 = ListeJoueur.get(1).GetPseudo();
+			int PVJ1 = ListeJoueur.get(0).GetPV();
+			int PVJ2 = ListeJoueur.get(1).GetPV();
+			System.out.print("-----------------------\nPV "+NicknameJ1+" : "+PVJ1+"\nPV "+NicknameJ2+" : "+PVJ2+"\n-----------------------\n");
+			System.out.print("Que voulez-vous faire ?\n1-Gerer les PV\n2-Gerer les tokens\n3-Partie Hasard\nChoix : ");
+			choix = sc.nextInt();
+			System.out.print("\n");
+			if (choix==1) {
+				try {
+					this.GestionPV2J();
+				}catch (InvalidPlayerChoiceException e) {
+					System.out.println("Veuillez Faire un choix de Joueur correct");
+				}finally {
+					this.GestionPV2J();
+				}
+			}else if (choix==2) {
+				this.GestionTerrain();
+			}else if (choix==3) {
+				try {
+					this.GestionHasard();
+				}catch (InvalidValueHasard e) {
+					System.out.println("\nMauvais Choix !");
+				}finally {
+					this.GestionHasard();
+				}
+			}else 
+				throw new InvalidChoiceException();
+		}while(ListeJoueur.get(0).GetPV()!=0 && ListeJoueur.get(0).GetPV()!=0);
+		this.MessageFinPartie2J();
+	}
+}

@@ -1,35 +1,41 @@
 package p1Code;
 
+import exception.CaseNonDisponibleException;
 import exception.CaseVideException;
 //@SuppressWarnings("unused")
 
 public class terrain {
-	private Jeton Terrain[];
+	private Jeton[] Terrain;
 	
 	public terrain() {
-		Jeton Terrain[]= new Jeton[5];
-		for (int i=0; i<5; i++) {
-			Terrain[i]=new Jeton();
+		Terrain = new Jeton[5];
+	}
+	
+	public void addToken(int i) throws CaseNonDisponibleException{
+		if (Terrain[i]!=null)
+			throw new CaseNonDisponibleException();
+		else{
+			Jeton t = new Jeton();
+			t.CreationMonstre();
+			this.Terrain[i]=t;
 		}
 	}
 	
-	public boolean addToken(int i){
-		Jeton t = new Jeton();
-		t.CreationMonstre();
-		this.Terrain[i]=t;
-		return true;
-	}
-	
-	public boolean removeToken(int i) throws CaseVideException{
+	public void removeToken(int i) throws CaseVideException{
 		if (Terrain[i]==null)
 			throw new CaseVideException();
 		else {
 			Terrain[i]=null;
-			return true;
 		}
 	}
 
-	public Jeton[] getTerrain() {
-		return Terrain;
+	public void afficheTerrain() {
+		for (int i=0; i<5; i++) {
+			if (Terrain[i] != null) {
+				System.out.print(Terrain[i].getNom()+" - "+Terrain[i].getPositionCombat()+" - "+Terrain[i].getATK()+"/"+Terrain[i].getDEF()+"| ");
+			}else
+				System.out.print("| Case Vide");
+		}
+		System.out.println();
 	}
 }
