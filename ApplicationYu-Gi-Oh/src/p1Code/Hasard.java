@@ -14,6 +14,7 @@ public class Hasard{
     }
 
     public String CoinFlip(){
+    	String Resultat;
         coin=Math.random();
         if (coin < 0.5){
             coin=1;
@@ -21,8 +22,9 @@ public class Hasard{
             coin=2;
         }
         if (coin==1) 
-        	return "Pile";
+        	Resultat="Pile";
         else
-        	return "Face";
+        	Resultat="Face";
+        return Resultat;
     }
 }
